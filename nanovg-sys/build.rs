@@ -14,17 +14,19 @@ fn build_library(backend_macro: &str) {
                                     // (msvc accepts /w or -w, gcc and clang only -w)
 
     config.include("nanovg/src");
-    config.include("freetype/include");
     config.file("nanovg/src/nanovg.c");
     config.file("nanovg_shim.c");
     config.define(backend_macro, None);
 
     if cfg!(feature = "freetype") {
         config.define("FONS_USE_FREETYPE", None);
-        if target.contains("linux") || target.contains("windows") {
+        if target.contains("linux") {
             println!("cargo:rustc-link-lib=freetype");
         } else if target.contains("darwin") {
             println!("cargo:rustc-link-lib=framework=freetype");
+        } else if target.contains("windows") {
+            config.include("freetype/include");
+            println!("cargo:rustc-link-lib=freetype");
         }
     }
 
