@@ -23,6 +23,7 @@ gl2 = []
 gl3 = []
 gles2 = []
 gles3 = []
+freetype= []
 
 [dependencies]
 bitflags = "1.0.3"
