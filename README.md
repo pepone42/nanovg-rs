@@ -36,6 +36,8 @@ features = ["glX"]
 `glX` can be exactly one of `gl2`, `gl3`, `gles2` or `gles3`,
 to specify the version of OpenGL to use. Use `gl3` or `gl2` for computers and `gles3` or `gles2` for mobile devices.
 
+Add "freetype" to the features list to enable freetype instead of stb_truetype for font rendering
+
 **TODO: SIMPLE API GUIDE**
 
 # Screenshots
