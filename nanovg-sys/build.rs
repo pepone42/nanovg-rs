@@ -1,4 +1,5 @@
 extern crate cc;
+extern crate pkg_config;
 
 use std::env;
 use std::path::Path;
@@ -21,6 +22,9 @@ fn build_library(backend_macro: &str) {
     if cfg!(feature = "freetype") {
         config.define("FONS_USE_FREETYPE", None);
         if target.contains("linux") {
+            for include in pkg_config::probe_library("freetype2").unwrap().include_paths {
+                config.include(include);
+            }
             println!("cargo:rustc-link-lib=freetype");
         } else if target.contains("darwin") {
             println!("cargo:rustc-link-lib=framework=freetype");
